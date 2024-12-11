@@ -1,5 +1,6 @@
 from aocd import get_data
 from typing import Sequence, Iterator
+from collections import Counter
 
 def parse_numbers(inp: Sequence[str]) -> tuple[list[int], list[int]]:
     left, right = [], []
@@ -19,7 +20,7 @@ def similarity_score(inp: Sequence[str]) -> int:
     left.sort()
     right.sort()
     return sum(abs(x - y) for x, y in zip(left, right))
-from collections import Counter
+
 
 def pt2(inp):
     left, right = parse_numbers(inp)
