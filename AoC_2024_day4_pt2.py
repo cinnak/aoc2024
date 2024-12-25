@@ -87,42 +87,17 @@ class XMASFinder:
         """统计所有XMAS图案
         返回：(找到的图案数量, 执行时间)
         """
-        start_time = time.time()
-        count = sum(map(self.check_point, self.matrix.iter_points()))
-        return count, time.time() - start_time
 
-def run_tests() -> None:
-    """运行测试用例"""
-    test_cases = [
-        # 测试用例1：标准X-MAS
-        [
-            ["M", "X", "M"],
-            ["S", "A", "S"],
-            ["M", "X", "M"]
-        ],
-    ]
-    
-    for i, test_matrix in enumerate(test_cases, 1):
-        try:
-            matrix = Matrix(test_matrix)
-            finder = XMASFinder(matrix)
-            count, time_taken = finder.count_patterns()
-            print(f"测试用例 {i}: 找到 {count} 个图案 (耗时 {time_taken:.4f}秒)")
-        except ValueError as e:
-            print(f"测试用例 {i} 失败: {e}")
+        count = sum(map(self.check_point, self.matrix.iter_points()))
+        return count
+
 
 if __name__ == "__main__":
-    # 运行测试
-    print("运行测试用例...")
-    run_tests()
-    
-    # 处理实际数据
-    print("\n处理实际数据...")
     try:
         data = get_data(year=2024, day=4)
         matrix = Matrix([list(line) for line in data.splitlines()])
         finder = XMASFinder(matrix)
-        count, time_taken = finder.count_patterns()
-        print(f"找到 {count} 个X-MAS图案 (耗时 {time_taken:.4f}秒)")
+        count = finder.count_patterns()
+        print(f"找到 {count} 个X-MAS图案")
     except ValueError as e:
         print(f"错误: {e}")
